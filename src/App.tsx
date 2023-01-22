@@ -1,26 +1,83 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { Switch, BrowserRouter as Router } from "react-router-dom";
+
+// Import Routes all
+import { userRoutes, authRoutes } from "./routes/allRoutes";
+
+//redux
+import { useSelector } from "react-redux";
+
+// Import all middleware
+import Authmiddleware from "./routes/middleware/Authmiddleware";
+
+// layouts Format
+import VerticalLayout from "./components/VerticalLayout/";
+import HorizontalLayout from "./components/HorizontalLayout/index";
+import NonAuthLayout from "./components/NonAuthLayout";
+
+// Import scss
+import "./assets/scss/theme.scss";
+
+// Import Firebase Configuration file
+// import { initFirebaseBackend } from "./helpers/firebase_helper";
+
+import fakeBackend from "./helpers/AuthType/fakeBackend";
+
+//api config
+// import config from "./config";
+
+// Activating fake backend
+fakeBackend();
+
+const App = () => {
+  const { layoutType } = useSelector((state: any) => ({
+    layoutType: state.Layout.layoutType,
+  }));
+
+  function getLayout() {
+    let layoutCls: Object = VerticalLayout;
+    switch (layoutType) {
+      case "horizontal":
+        layoutCls = HorizontalLayout;
+        break;
+      default:
+        layoutCls = VerticalLayout;
+        break;
+    }
+    return layoutCls;
+  }
+
+  const Layout = getLayout();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Router>
+        <Switch>
+          {authRoutes.map((route, idx) => (
+            <Authmiddleware
+              path={route.path}
+              layout={NonAuthLayout}
+              component={route.component}
+              key={idx}
+              isAuthProtected={false}
+              exact
+            />
+          ))}
+
+          {userRoutes.map((route: any, idx: number) => (
+            <Authmiddleware
+              path={route.path}
+              layout={Layout}
+              component={route.component}
+              key={idx}
+              isAuthProtected={true}
+              exact
+            />
+          ))}
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
