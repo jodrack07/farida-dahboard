@@ -1,23 +1,20 @@
-import React from "react";
-import { Row, Col, Card, CardBody, CardHeader } from "reactstrap";
+import React, { useState } from "react";
+import { Row, Col, CardBody, Card, CardHeader, Modal } from "reactstrap";
 import MetaTags from "react-meta-tags";
-import { Link } from "react-router-dom";
-
-// datatable related plugins
+import Form from "./Form";
+// data table related plugins
+import "./datatables.scss";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
   SizePerPageDropdownStandalone,
 } from "react-bootstrap-table2-paginator";
-
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import "./datatables.scss";
 
-const DatatableTables = () => {
+const index = () => {
   const columns = [
     {
       dataField: "code",
@@ -25,100 +22,132 @@ const DatatableTables = () => {
       sort: true,
     },
     {
-      dataField: "designation",
-      text: "Designation",
-      sort: true,
-    },
-
-    {
-      dataField: "adresse",
-      text: "Adresse",
-      sort: true,
-    },
-
-    {
       dataField: "creation",
-      text: "Creation ",
+      text: "Creation",
       sort: true,
     },
     {
-      dataField: "contact",
-      text: "Contact",
+      dataField: "debut",
+      text: "Debut",
+      sort: true,
+    },
+
+    {
+      dataField: "fin",
+      text: "Fin ",
+      sort: true,
+    },
+
+    {
+      dataField: "fichier",
+      text: "Fichier",
       sort: true,
     },
     {
-      dataField: "email",
-      text: "Email",
+      dataField: "details",
+      text: "Details",
       sort: true,
     },
     {
-      dataField: "siteWeb",
-      text: "Site Web",
+      dataField: "resume",
+      text: "Resume",
       sort: true,
     },
     {
-      dataField: "logo",
-      text: "Logo",
-      sort: true,
-    },
-    {
-      dataField: "couleur",
-      text: "Couleur",
+      dataField: "etat",
+      text: "Etat",
       sort: true,
     },
   ];
 
   // Table Data
-  const entrepriseData = [
+  const annonceData = [
     {
-      code: 1,
-      designation: "EMMANUEL FM",
-      creation: "14/01/2023",
-      contact: "+243 999 999 999",
-      email: "entreprise2@gmail.com",
-      siteWeb: "wwww.entreprise1.com",
-      logo: "Logo",
-      couleur: "green",
+      code: 2,
+      creation: "01/01/2023",
+      debut: "03/01/2023",
+      fin: "03/02/2023",
+      fichier: "file2",
+      details: "cette annonce 2......",
+      resume: "cette annonce 2......",
+      etat: "active",
     },
+
     {
       code: 3,
-      designation: "50 FM",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise2.com",
-      logo: "__",
-      couleur: "Yellow",
+      creation: "10/12/2022",
+      debut: "12/12/2022",
+      fin: "12/01/2023",
+      fichier: "file3",
+      details: "cette annonce 3......",
+      resume: "cette annonce 3......",
+      etat: "inactive",
     },
+
     {
       code: 4,
-      designation: "DIGITAL CONGO",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise3.com",
-      logo: "Logo",
-      couleur: "Pink",
+      creation: "20/11/2022",
+      debut: "22/11/2022",
+      fin: "22/12/2022",
+      fichier: "file4",
+      details: "cette annonce 4......",
+      resume: "cette annonce 4......",
+      etat: "active",
     },
+
     {
       code: 5,
-      designation: "RTNC",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise5.com",
-      logo: "Logo",
-      couleur: "Silver",
+      creation: "15/10/2022",
+      debut: "17/10/2022",
+      fin: "17/11/2022",
+      fichier: "file5",
+      details: "cette annonce 5......",
+      resume: "cette annonce 5......",
+      etat: "inactive",
     },
+
     {
       code: 6,
-      designation: "UB FM",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise5.com",
-      logo: "Logo",
-      couleur: "Aqua",
+      creation: "01/09/2022",
+      debut: "03/09/2022",
+      fin: "03/10/2022",
+      fichier: "file6",
+      details: "cette annonce 6......",
+      resume: "cette annonce 6......",
+      etat: "active",
+    },
+
+    {
+      code: 7,
+      creation: "20/08/2022",
+      debut: "22/08/2022",
+      fin: "22/09/2022",
+      fichier: "file7",
+      details: "cette annonce 7......",
+      resume: "cette annonce 7......",
+      etat: "inactive",
+    },
+
+    {
+      code: 8,
+      creation: "10/07/2022",
+      debut: "12/07/2022",
+      fin: "12/08/2022",
+      fichier: "file8",
+      details: "cette annonce 8......",
+      resume: "cette annonce 8......",
+      etat: "active",
+    },
+
+    {
+      code: 9,
+      creation: "01/06/2022",
+      debut: "03/06/2022",
+      fin: "03/07/2022",
+      fichier: "file9",
+      details: "cette annonce 9......",
+      resume: "cette annonce 9......",
+      etat: "inactive",
     },
   ];
 
@@ -131,7 +160,7 @@ const DatatableTables = () => {
 
   const pageOptions: any = {
     sizePerPage: 10,
-    totalSize: entrepriseData.length, // replace later with size(customers),
+    totalSize: annonceData.length, // replace later with size(customers),
     custom: true,
   };
 
@@ -141,43 +170,52 @@ const DatatableTables = () => {
   };
 
   const { SearchBar } = Search;
+  const [modal_center, setmodal_center] = useState(false);
+
+  function removeBodyCss() {
+    document.body.classList.add("no_padding");
+  }
+
+  function tog_center() {
+    setmodal_center(!modal_center);
+    removeBodyCss();
+  }
 
   return (
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Entreprises | Farida</title>
+          <title>Farida - Annonce</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Entreprises" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Annonces" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">
-                    List des entreprise Enregistrer
-                  </h4>
-                  <Link
-                    to="//www.npmjs.com/package/react-super-responsive-table"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-sm btn-soft-secondary"
+                  <h4 className="card-title">Toutes les annonces</h4>
+                  <button
+                    onClick={() => {
+                      tog_center();
+                    }}
+                    className="btn btn-primary text-white"
                   >
-                    Docs <i className="mdi mdi-arrow-right align-middle"></i>
-                  </Link>
+                    Creer une annonce{" "}
+                    <i className="mdi mdi-arrow-right align-middle"></i>
+                  </button>
                 </CardHeader>
                 <CardBody>
                   <PaginationProvider
                     pagination={paginationFactory(pageOptions)}
                     // columns={columns}
-                    // data={entrepriseData}
+                    // data={annonceData}
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
                         keyField="id"
                         columns={columns}
-                        data={entrepriseData}
+                        data={annonceData}
                         search
                       >
                         {(toolkitProps) => (
@@ -202,7 +240,9 @@ const DatatableTables = () => {
                                     striped={false}
                                     defaultSorted={defaultSorted}
                                     selectRow={selectRow}
-                                    classes={"table align-middle table-nowrap"}
+                                    classes={
+                                      "table align-middle table-nowrap table-striped"
+                                    }
                                     headerWrapperClasses={"thead-light"}
                                     {...toolkitProps.baseProps}
                                     {...paginationTableProps}
@@ -236,8 +276,34 @@ const DatatableTables = () => {
           </Row>
         </div>
       </div>
+      {/* Modal */}
+      <Modal
+        isOpen={modal_center}
+        toggle={() => {
+          tog_center();
+        }}
+        centered={true}
+      >
+        <div className="modal-header">
+          <h5 className="modal-title mt-0">Creer une nouvelle annonce</h5>
+          <button
+            type="button"
+            onClick={() => {
+              setmodal_center(false);
+            }}
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <Form />
+        </div>
+      </Modal>
     </React.Fragment>
   );
 };
 
-export default DatatableTables;
+export default index;

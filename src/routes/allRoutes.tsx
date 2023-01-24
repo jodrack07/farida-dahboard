@@ -2,6 +2,12 @@ import { Redirect } from "react-router-dom";
 
 //Sales
 import Sales from "../pages/Sales";
+import Entreprise from "../pages/Entreprise";
+import EntrepriseDetails from "../pages/EntrepriseDetails/ProjectOverview";
+import Annonce from "../pages/Annonce";
+import User from "../pages/User";
+import Station from "../pages/Station";
+import Programme from "../pages/Programme";
 //Analytics
 import Analytics from "../pages/Analytics";
 //Calendar
@@ -18,7 +24,7 @@ import UserList from "../pages/Contacts/UsertList";
 import UsertSetting from "../pages/Contacts/UsertSetting";
 
 //profile
-import UserProfile from "../pages/Authentication/user-profile"
+import UserProfile from "../pages/Authentication/user-profile";
 
 //  Inner Authentication
 import Login1 from "../pages/AuthenticationInner/Login1";
@@ -64,7 +70,7 @@ import ProjectCreate from "../pages/Projects/ProjectCreate";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
 import Register from "../pages/Authentication/Register";
-import ForgetPwd from "../pages/Authentication/ForgetPassword"
+import ForgetPwd from "../pages/Authentication/ForgetPassword";
 
 //utility
 import PageStarter from "../pages/Utility/PageStarter";
@@ -72,7 +78,6 @@ import PagesComingsoon from "../pages/Utility/PageComingsoon";
 import PageMaintenance from "../pages/Utility/PageMaintenance";
 import PageFaqs from "../pages/Utility/PageFAQs";
 import Profile from "../pages/Utility/Profile";
-
 
 //pricing
 import PricingBasic from "../pages/Pricing/PricingBasic";
@@ -152,7 +157,7 @@ import RangeSlider from "../pages/Extended/Rangeslider";
 import UiSweetAlert from "../pages/Extended/SweetAlert";
 import UiRating from "../pages/Extended/UiRating";
 import Notifications from "../pages/Extended/Notifications";
-import Swiperslider from '../pages/Extended/Swiperslider';
+import Swiperslider from "../pages/Extended/Swiperslider";
 
 // Maps
 import MapsGoogle from "../pages/Maps/MapsGoogle";
@@ -168,6 +173,12 @@ interface RouteProps {
 const userRoutes: Array<RouteProps> = [
   //dashboard
   { path: "/sales", component: Sales },
+  { path: "/entreprise", component: Entreprise },
+  { path: "/entreprise-details", component: EntrepriseDetails },
+  { path: "/annonce", component: Annonce },
+  { path: "/users", component: User },
+  { path: "/station", component: Station },
+  { path: "/programme", component: Programme },
   { path: "/dashboards-analytics", component: Analytics },
   { path: "/calendar", component: Calendar },
   { path: "/chat", component: Chat },
@@ -223,7 +234,6 @@ const userRoutes: Array<RouteProps> = [
   { path: "/pricing-basic", component: PricingBasic },
   { path: "/pricing-table", component: PricingCover },
 
-  
   //Invoice
   { path: "/invoices-list", component: InvoiceList },
   { path: "/invoices-detail", component: InvoiceDetail },
@@ -264,14 +274,12 @@ const userRoutes: Array<RouteProps> = [
   { path: "/charts-timeline", component: ChartsTimeline },
   { path: "/charts-treemap", component: ChartsTreemap },
 
-
   //Icons
   { path: "/icons-boxicons", component: IconBoxicons },
   { path: "/icons-feathericons", component: Feathericons },
   { path: "/icons-materialdesign", component: IconMaterialdesign },
   { path: "/icons-fontawesome", component: IconFontawesome },
   { path: "/icons-unicons", component: IconUnicon },
-
 
   // //profile
   { path: "/profile", component: UserProfile },
@@ -283,7 +291,7 @@ const userRoutes: Array<RouteProps> = [
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/sales" /> }
+  { path: "/", exact: true, component: () => <Redirect to="/sales" /> },
 ];
 
 const authRoutes: Array<RouteProps> = [

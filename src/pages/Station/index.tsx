@@ -1,124 +1,63 @@
-import React from "react";
-import { Row, Col, Card, CardBody, CardHeader } from "reactstrap";
+import React, { useState } from "react";
+import { Row, Col, CardBody, Card, CardHeader, Modal } from "reactstrap";
 import MetaTags from "react-meta-tags";
-import { Link } from "react-router-dom";
-
-// datatable related plugins
+import Form from "./Form";
+// data table related plugins
+import "./datatables.scss";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
   SizePerPageDropdownStandalone,
 } from "react-bootstrap-table2-paginator";
-
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import "./datatables.scss";
 
-const DatatableTables = () => {
+const index = () => {
   const columns = [
     {
-      dataField: "code",
-      text: "Code",
+      dataField: "nom",
+      text: "Nom complet",
       sort: true,
     },
     {
-      dataField: "designation",
-      text: "Designation",
+      dataField: "phone",
+      text: "Telephone",
       sort: true,
     },
 
-    {
-      dataField: "adresse",
-      text: "Adresse",
-      sort: true,
-    },
-
-    {
-      dataField: "creation",
-      text: "Creation ",
-      sort: true,
-    },
-    {
-      dataField: "contact",
-      text: "Contact",
-      sort: true,
-    },
     {
       dataField: "email",
-      text: "Email",
+      text: "Email ",
       sort: true,
     },
     {
-      dataField: "siteWeb",
-      text: "Site Web",
-      sort: true,
-    },
-    {
-      dataField: "logo",
-      text: "Logo",
-      sort: true,
-    },
-    {
-      dataField: "couleur",
-      text: "Couleur",
+      dataField: "address",
+      text: "Address",
       sort: true,
     },
   ];
 
   // Table Data
-  const entrepriseData = [
+  const annonceData = [
     {
-      code: 1,
-      designation: "EMMANUEL FM",
-      creation: "14/01/2023",
-      contact: "+243 999 999 999",
-      email: "entreprise2@gmail.com",
-      siteWeb: "wwww.entreprise1.com",
-      logo: "Logo",
-      couleur: "green",
+      nom: "Christian Siku",
+      phone: "+243 000 000 000",
+      email: "chris@gmail.com",
+      address: "goma, goma - Himbi",
     },
     {
-      code: 3,
-      designation: "50 FM",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise2.com",
-      logo: "__",
-      couleur: "Yellow",
+      nom: "Christian Siku",
+      phone: "+243 000 000 000",
+      email: "chris@gmail.com",
+      address: "goma, goma - Himbi",
     },
     {
-      code: 4,
-      designation: "DIGITAL CONGO",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise3.com",
-      logo: "Logo",
-      couleur: "Pink",
-    },
-    {
-      code: 5,
-      designation: "RTNC",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise5.com",
-      logo: "Logo",
-      couleur: "Silver",
-    },
-    {
-      code: 6,
-      designation: "UB FM",
-      creation: "22/02/2021",
-      contact: "+243 999 999 999",
-      email: "entreprise@gmail.com",
-      siteWeb: "wwww.entreprise5.com",
-      logo: "Logo",
-      couleur: "Aqua",
+      nom: "Christian Siku",
+      phone: "+243 000 000 000",
+      email: "chris@gmail.com",
+      address: "goma, goma - Himbi",
     },
   ];
 
@@ -131,7 +70,7 @@ const DatatableTables = () => {
 
   const pageOptions: any = {
     sizePerPage: 10,
-    totalSize: entrepriseData.length, // replace later with size(customers),
+    totalSize: annonceData.length, // replace later with size(customers),
     custom: true,
   };
 
@@ -141,43 +80,52 @@ const DatatableTables = () => {
   };
 
   const { SearchBar } = Search;
+  const [modal_center, setmodal_center] = useState(false);
+
+  function removeBodyCss() {
+    document.body.classList.add("no_padding");
+  }
+
+  function tog_center() {
+    setmodal_center(!modal_center);
+    removeBodyCss();
+  }
 
   return (
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Entreprises | Farida</title>
+          <title>Farida - Annonce</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Entreprises" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Utilisateurs" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">
-                    List des entreprise Enregistrer
-                  </h4>
-                  <Link
-                    to="//www.npmjs.com/package/react-super-responsive-table"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-sm btn-soft-secondary"
+                  <h4 className="card-title">Liste d&apos;utilisateurs</h4>
+                  <button
+                    onClick={() => {
+                      tog_center();
+                    }}
+                    className="btn btn-primary text-white"
                   >
-                    Docs <i className="mdi mdi-arrow-right align-middle"></i>
-                  </Link>
+                    Nouvel utulisateur{" "}
+                    <i className="mdi mdi-arrow-right align-middle"></i>
+                  </button>
                 </CardHeader>
                 <CardBody>
                   <PaginationProvider
                     pagination={paginationFactory(pageOptions)}
                     // columns={columns}
-                    // data={entrepriseData}
+                    // data={annonceData}
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
                         keyField="id"
                         columns={columns}
-                        data={entrepriseData}
+                        data={annonceData}
                         search
                       >
                         {(toolkitProps) => (
@@ -202,7 +150,9 @@ const DatatableTables = () => {
                                     striped={false}
                                     defaultSorted={defaultSorted}
                                     selectRow={selectRow}
-                                    classes={"table align-middle table-nowrap"}
+                                    classes={
+                                      "table align-middle table-nowrap table-striped"
+                                    }
                                     headerWrapperClasses={"thead-light"}
                                     {...toolkitProps.baseProps}
                                     {...paginationTableProps}
@@ -236,8 +186,34 @@ const DatatableTables = () => {
           </Row>
         </div>
       </div>
+      {/* Modal */}
+      <Modal
+        isOpen={modal_center}
+        toggle={() => {
+          tog_center();
+        }}
+        centered={true}
+      >
+        <div className="modal-header">
+          <h5 className="modal-title mt-0">Creer une nouvelle annonce</h5>
+          <button
+            type="button"
+            onClick={() => {
+              setmodal_center(false);
+            }}
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <Form />
+        </div>
+      </Modal>
     </React.Fragment>
   );
 };
 
-export default DatatableTables;
+export default index;
