@@ -26,7 +26,7 @@ const ProfileMenu = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
 
   const [username, setusername] = useState("Admin");
-  const [email, setemail] = useState<string>("admin@themesbrand.com");
+  const [email, setemail] = useState<string>("admin@gmail.com");
 
   useEffect(() => {
     const getAuthUser = localStorage.getItem("authUser");
@@ -74,7 +74,7 @@ const ProfileMenu = (props: any) => {
           />
           <span className="ms-2 d-none d-sm-block user-item-desc">
             <span className="user-name">{username}</span>
-            <span className="user-sub-title">Administrator</span>
+            <span className="user-sub-title">Administrateur</span>
           </span>
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end pt-0" dir="left">
@@ -84,12 +84,9 @@ const ProfileMenu = (props: any) => {
           </div>
           <DropdownItem tag="a" href="/profile"><i className="mdi mdi-account-circle text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Profile")}</span></DropdownItem>
           <DropdownItem tag="a" href="chat"><i className="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Messages")}</span></DropdownItem>
-          <DropdownItem tag="a" href="kanban-board"><i className="mdi mdi-calendar-check-outline text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Taskboard")}</span></DropdownItem>
-          <DropdownItem tag="a" href="pages-faqs"><i className="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Help")}</span></DropdownItem>
           <DropdownItem divider />
-          <DropdownItem tag="a" href="#"><i className="mdi mdi-wallet text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Balance")} : <b>$6951.02</b></span></DropdownItem>
-          <DropdownItem tag="a" className="d-flex align-items-center" href="user-settings"><i className="mdi mdi-cog-outline text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Settings")}</span><span className="badge badge-soft-success ms-auto">New</span></DropdownItem>
-          <DropdownItem tag="a" href="auth-lockscreen-basic"><i className="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Lock screen")} </span></DropdownItem>
+          {/* <DropdownItem tag="a" href="#"><i className="mdi mdi-wallet text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Balance")} : <b>$6951.02</b></span></DropdownItem> */}
+          <DropdownItem tag="a" className="d-flex align-items-center" href="user-settings"><i className="mdi mdi-cog-outline text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Settings")}</span></DropdownItem>
           <DropdownItem tag="a" href="/logout">
             <i className="mdi mdi-logout text-muted font-size-16 align-middle me-1"></i> <span className="align-middle">{props.t("Logout")}</span>
             </DropdownItem>

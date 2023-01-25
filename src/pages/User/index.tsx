@@ -146,7 +146,7 @@ const index = () => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Farida - Annonce</title>
+          <title>Farida - Utilisateurs</title>
         </MetaTags>
         <div className="container-fluid">
           <Breadcrumbs title="Tables" breadcrumbItem="Utilisateurs" />

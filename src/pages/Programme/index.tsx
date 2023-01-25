@@ -95,16 +95,16 @@ const index = () => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Farida - Annonce</title>
+          <title>Farida - Programmes</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Utilisateurs" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Programmes" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">Liste d&apos;utilisateurs</h4>
+                  <h4 className="card-title">Liste d&apos;Programmes</h4>
                   <button
                     onClick={() => {
                       tog_center();
