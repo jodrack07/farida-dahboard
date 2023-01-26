@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/display-name */
+import React, { useState, useEffect } from "react";
 import { Row, Col, CardBody, Card, CardHeader, Modal } from "reactstrap";
 import MetaTags from "react-meta-tags";
 import Form from "./Form";
@@ -17,66 +18,74 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 const index = () => {
   const columns = [
     {
-      dataField: "nom",
-      text: "Nom complet",
+      dataField: "code",
+      text: "Code",
       sort: true,
     },
     {
-      dataField: "phone",
-      text: "Telephone",
+      dataField: "designation",
+      text: "Designation",
       sort: true,
     },
 
+    {
+      dataField: "adresse",
+      text: "Adresse",
+      sort: true,
+    },
+
+    {
+      dataField: "creation",
+      text: "Creation ",
+      sort: true,
+    },
+    {
+      dataField: "contact",
+      text: "Contact",
+      sort: true,
+    },
     {
       dataField: "email",
-      text: "Email ",
+      text: "Email",
       sort: true,
     },
     {
-      dataField: "address",
-      text: "Address",
+      dataField: "siteWeb",
+      text: "Site Web",
+      sort: true,
+    },
+    {
+      dataField: "logo",
+      text: "Logo",
+      sort: true,
+    },
+    {
+      dataField: "couleur",
+      text: "Couleur",
       sort: true,
     },
   ];
 
-  // Table Data
-  const annonceData = [
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-  ];
-
-  const defaultSorted: any = [
+  let entrepriseData = [];
+  entrepriseData = JSON.parse(localStorage.getItem("entrepriseData"));
+  const defaultSorted = [
     {
       dataField: "id",
       order: "asc",
     },
   ];
 
-  const pageOptions: any = {
+  const pageOptions = {
     sizePerPage: 10,
-    totalSize: annonceData.length, // replace later with size(customers),
+    totalSize: entrepriseData.length, // replace later with size(customers),
     custom: true,
   };
 
   // Select All Button operation
-  const selectRow: any = {
+  const selectRow = {
     mode: "checkbox",
+    clickToSelect: true,
+    // onSelect: (row: any, isSelected: any) => handleRowClick(row, isSelected),
   };
 
   const { SearchBar } = Search;
@@ -95,23 +104,25 @@ const index = () => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Farida - Programmes</title>
+          <title>Farida - Entreprises</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Programmes" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Entreprises" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">Liste d&apos;Programmes</h4>
+                  <h4 className="card-title">
+                    List des entreprise Enregistrer
+                  </h4>
                   <button
                     onClick={() => {
                       tog_center();
                     }}
                     className="btn btn-primary text-white"
                   >
-                    Nouvel utulisateur{" "}
+                    Enregistrer une entreprise{" "}
                     <i className="mdi mdi-arrow-right align-middle"></i>
                   </button>
                 </CardHeader>
@@ -119,13 +130,13 @@ const index = () => {
                   <PaginationProvider
                     pagination={paginationFactory(pageOptions)}
                     // columns={columns}
-                    // data={annonceData}
+                    // data={entrepriseData}
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
-                        keyField="id"
+                        keyField="code"
                         columns={columns}
-                        data={annonceData}
+                        data={entrepriseData.reverse()}
                         search
                       >
                         {(toolkitProps) => (
@@ -156,6 +167,7 @@ const index = () => {
                                     headerWrapperClasses={"thead-light"}
                                     {...toolkitProps.baseProps}
                                     {...paginationTableProps}
+                                    columns={columns}
                                   />
                                 </div>
                               </Col>
@@ -195,7 +207,9 @@ const index = () => {
         centered={true}
       >
         <div className="modal-header">
-          <h5 className="modal-title mt-0">Creer une nouvelle annonce</h5>
+          <h5 className="modal-title mt-0">
+            Enregister une nouvelle entreprise
+          </h5>
           <button
             type="button"
             onClick={() => {

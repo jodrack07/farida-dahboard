@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -9,30 +9,38 @@ import {
   Input,
   Button,
 } from "reactstrap";
-
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import { randomId } from "src/components/NonAuthLayout";
 
 const From = () => {
-  const [designation, setDesignation] = useState("");
-  const [date, setDate] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [web, setWeb] = useState("");
-  const [color, setColor] = useState("");
-  const [description, setDescription] = useState("");
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    setDesignation("");
-    setDate("");
-    setAddress("");
-    setPhone("");
-    setEmail("");
-    setWeb("");
-    setColor("");
-    setDescription("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Get the form data as an object
+    const data = new FormData(event.target);
+    let formData = {};
+    for (const [key, value] of data) {
+      formData[key] = value;
+    }
+    // Get the existing array from localstorage
+    let info =
+      JSON.parse(localStorage.getItem("entrepriseData")) || initialInfo;
+    // Create an object with the desired properties and values
+    const newData = {
+      adresse: formData.adresse,
+      code: randomId(4),
+      contact: formData.telephone,
+      couleur: formData.couleur,
+      creation: formData.date,
+      designation: formData.designation,
+      email: formData.email,
+      logo: "Fichier_" + randomId(6),
+      siteWeb: formData.web,
+      description: formData.description,
+    };
+    // Push the new form data to the array
+    info.push(newData);
+    // Save the updated array to localstorage
+    localStorage.setItem("entrepriseData", JSON.stringify(info));
   };
 
   return (
@@ -40,7 +48,7 @@ const From = () => {
       <Col xl={12}>
         <Card>
           <CardBody>
-            <AvForm className="needs-validation">
+            <AvForm className="needs-validation" onSubmit={handleSubmit}>
               <Row>
                 <Col md="6">
                   <FormGroup className="mb-3">
@@ -53,7 +61,6 @@ const From = () => {
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="designationValidation"
-                      onChange={(e) => setDesignation(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -69,40 +76,22 @@ const From = () => {
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="dateValidation"
-                      onChange={(e) => setDate(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
               </Row>
               <Row>
-                <Col md="6">
+                <Col md="12">
                   <FormGroup className="mb-3">
                     <Label htmlFor="addressValidation">Address</Label>
                     <AvField
-                      name="address"
+                      name="adresse"
                       placeholder="Entrer une Adress"
                       type="text"
                       errorMessage="Entrez l'addresse de l'entreprise!"
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="addressValidation"
-                      onChange={(e) => setAddress(e.target.value)}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col md="6">
-                  <FormGroup className="mb-3">
-                    <Label htmlFor="phoneValidation">Telephone</Label>
-                    <AvField
-                      name="telephone"
-                      placeholder="Numero de telephone"
-                      type="number"
-                      errorMessage="Entrez un numero de telephone"
-                      className="form-control"
-                      validate={{ required: { value: true } }}
-                      id="phoneValidation"
-                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -119,7 +108,6 @@ const From = () => {
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="emailValidation"
-                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -135,7 +123,6 @@ const From = () => {
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="webValidation"
-                      onChange={(e) => setWeb(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -143,19 +130,18 @@ const From = () => {
               <Row>
                 <Col md="6">
                   <FormGroup className="mb-3">
-                    <Label htmlFor="logValidation">Logo</Label>
+                    <Label htmlFor="phoneValidation">Telephone</Label>
                     <AvField
-                      name="logo"
-                      placeholder="Logo"
-                      type="file"
-                      errorMessage="Entrez le logo de l'entreprise!"
+                      name="telephone"
+                      placeholder="Numero de telephone"
+                      type="number"
+                      errorMessage="Entrez un numero de telephone"
                       className="form-control"
                       validate={{ required: { value: true } }}
-                      id="logValidation"
+                      id="phoneValidation"
                     />
                   </FormGroup>
                 </Col>
-
                 <Col md="6">
                   <FormGroup className="mb-3">
                     <Label htmlFor="couleurValidation">Code couleur</Label>
@@ -167,7 +153,6 @@ const From = () => {
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="couleurValidation"
-                      onChange={(e) => setColor(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -182,7 +167,7 @@ const From = () => {
                         className="form-control"
                         placeholder="Description de l'entreprise"
                         id="description"
-                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
                       />
                       <Label htmlFor="description">
                         Description (optional)
@@ -214,9 +199,6 @@ const From = () => {
               <Button color="primary" type="submit">
                 Enregistrez
               </Button>
-              {/* <button type="submit" className="btn btn-info">
-                save
-              </button> */}
             </AvForm>
           </CardBody>
         </Card>

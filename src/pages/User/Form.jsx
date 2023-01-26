@@ -11,20 +11,45 @@ import {
 } from "reactstrap";
 
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import { randomId } from "src/components/NonAuthLayout";
 
 const From = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Get the form data as an object
+    const data = new FormData(event.target);
+    let formData = {};
+    for (const [key, value] of data) {
+      formData[key] = value;
+    }
+    // Get the existing array from localstorage
+    let info = JSON.parse(localStorage.getItem("utilisateurs")) || initialInfo;
+    // Create an object with the desired properties and values
+    const newData = {
+      code: randomId(4),
+      nom: formData.nom,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      password: "FRD" + randomId(4),
+    };
+    // Push the new form data to the array
+    info.push(newData);
+    // Save the updated array to localstorage
+    localStorage.setItem("utilisateurs", JSON.stringify(info));
+  };
   return (
     <React.Fragment>
       <Col xl={12}>
         <Card>
           <CardBody>
-            <AvForm action="/" className="needs-validation">
+            <AvForm className="needs-validation" onSubmit={handleSubmit}>
               <Row>
                 <Col md="6">
                   <FormGroup className="mb-3">
                     <Label htmlFor="nomValidation">Nom Complet</Label>
                     <AvField
-                      name="nomComplet"
+                      name="nom"
                       placeholder="Nom complet"
                       type="text"
                       errorMessage="Entrer le nom complet de l'utilisateur!"

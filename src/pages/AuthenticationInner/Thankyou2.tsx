@@ -28,7 +28,7 @@ const Thankyou2 = () => {
                                                 <div className="p-4 p-lg-5 bg-primary h-100 d-flex align-items-center justify-content-center">
                                                     <div className="w-100 text-center">
                                                         <div className="mb-4 mb-md-5">
-                                                            <Link to="/sales" className="d-block auth-logo">
+                                                            <Link to="/dashboard" className="d-block auth-logo">
                                                                 <img src={logolight} alt="" />
                                                             </Link>
                                                         </div>
@@ -44,7 +44,7 @@ const Thankyou2 = () => {
                                                             <h4 className="text-white">Thank You !</h4>
                                                             <p>Thank you for using <span className="fw-semibold">Dashonic</span></p>
                                                             <div className="mt-4">
-                                                                <Link to="/sales" className="btn btn-info w-100">Back to Dashboard</Link>
+                                                                <Link to="/dashboard" className="btn btn-info w-100">Back to Dashboard</Link>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -21,7 +21,7 @@ const ErrorBasic = () => {
                                     <img src={logoSm} alt="" className="avatar-lg h-auto mx-2" />0</h1>
                                 <h4 className="text-uppercase text-muted">Internal Server Error</h4>
                                 <div className="mt-5 text-center">
-                                    <Link className="btn btn-primary" to="/sales">Back to Dashboard</Link>
+                                    <Link className="btn btn-primary" to="/dashboard">Back to Dashboard</Link>
                                 </div>
                             </div>
                         </Col>

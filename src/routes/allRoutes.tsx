@@ -172,7 +172,7 @@ interface RouteProps {
 
 const userRoutes: Array<RouteProps> = [
   //dashboard
-  { path: "/sales", component: Sales },
+  { path: "/dashboard", component: Sales },
   { path: "/entreprise", component: Entreprise },
   { path: "/entreprise-details", component: EntrepriseDetails },
   { path: "/annonce", component: Annonce },
@@ -291,7 +291,7 @@ const userRoutes: Array<RouteProps> = [
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/sales" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
 ];
 
 const authRoutes: Array<RouteProps> = [

@@ -17,6 +17,11 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 const index = () => {
   const columns = [
     {
+      dataField: "code",
+      text: "Code",
+      sort: true,
+    },
+    {
       dataField: "nom",
       text: "Nom complet",
       sort: true,
@@ -37,96 +42,32 @@ const index = () => {
       text: "Address",
       sort: true,
     },
-  ];
-
-  // Table Data
-  const annonceData = [
-    {
-      nom: "Sarah Johnson",
-      phone: "+1 212 555 1234",
-      email: "sarah@gmail.com",
-      address: "New York, NY - USA",
-    },
 
     {
-      nom: "Ahmed Ali",
-      phone: "+971 50 123 4567",
-      email: "ahmed@gmail.com",
-      address: "Dubai - UAE",
-    },
-
-    {
-      nom: "Juan Perez",
-      phone: "+54 11 1234 5678",
-      email: "juan@gmail.com",
-      address: "Buenos Aires - Argentina",
-    },
-
-    {
-      nom: "Maria Rodriguez",
-      phone: "+33 6 12 34 56 78",
-      email: "maria@gmail.com",
-      address: "Paris - France",
-    },
-
-    {
-      nom: "Takashi Yamamoto",
-      phone: "+81 3 1234 5678",
-      email: "takashi@gmail.com",
-      address: "Tokyo - Japan",
-    },
-
-    {
-      nom: "Kim Min-Jae",
-      phone: "+82 10 1234 5678",
-      email: "kim@gmail.com",
-      address: "Seoul - South Korea",
-    },
-
-    {
-      nom: "Nguyen Van An",
-      phone: "+84 987 654 321",
-      email: "nguyen@gmail.com",
-      address: "Ho Chi Minh City - Vietnam",
-    },
-
-    {
-      nom: "Piotr Kowalski",
-      phone: "+48 22 123 45 67",
-      email: "piotr@gmail.com",
-      address: "Warsaw - Poland",
-    },
-
-    {
-      nom: "Li Mei",
-      phone: "+86 10 1234 5678",
-      email: "li@gmail.com",
-      address: "Beijing - China",
-    },
-
-    {
-      nom: "Sofia Gomez",
-      phone: "+57 1 1234 5678",
-      email: "sofia@gmail.com",
-      address: "Bogota - Colombia",
+      dataField: "password",
+      text: "Mot de passe",
+      sort: true,
     },
   ];
 
-  const defaultSorted: any = [
+  let useData = [];
+  useData = JSON.parse(localStorage.getItem("utilisateurs"));
+
+  const defaultSorted = [
     {
       dataField: "id",
       order: "asc",
     },
   ];
 
-  const pageOptions: any = {
+  const pageOptions = {
     sizePerPage: 10,
-    totalSize: annonceData.length, // replace later with size(customers),
+    totalSize: useData.length, // replace later with size(customers),
     custom: true,
   };
 
   // Select All Button operation
-  const selectRow: any = {
+  const selectRow = {
     mode: "checkbox",
   };
 
@@ -170,13 +111,13 @@ const index = () => {
                   <PaginationProvider
                     pagination={paginationFactory(pageOptions)}
                     // columns={columns}
-                    // data={annonceData}
+                    // data={useData}
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
-                        keyField="id"
+                        keyField="code"
                         columns={columns}
-                        data={annonceData}
+                        data={useData.reverse()}
                         search
                       >
                         {(toolkitProps) => (

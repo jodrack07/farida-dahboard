@@ -58,7 +58,7 @@ const PagesComingsoon = () => {
                         <div className="d-flex flex-column min-vh-100 px-3 pt-4">
                             <div className="text-center my-auto py-5">
                                 <div className="mb-4 mb-md-5">
-                                    <Link to="/sales" className="d-block auth-logo">
+                                    <Link to="/dashboard" className="d-block auth-logo">
                                         <img src={logoDark} alt="" height="22" className="auth-logo-dark" />
                                         <img src={logolight} alt="" height="22" className="auth-logo-light" />
                                     </Link>

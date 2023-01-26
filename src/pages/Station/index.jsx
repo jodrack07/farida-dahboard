@@ -14,6 +14,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 
+
 const index = () => {
   const columns = [
     {
@@ -27,145 +28,51 @@ const index = () => {
       sort: true,
     },
     {
-      dataField: "debut",
-      text: "Debut",
+      dataField: "frequence",
+      text: "Frequence",
       sort: true,
     },
 
     {
-      dataField: "fin",
-      text: "Fin ",
-      sort: true,
-    },
-
-    {
-      dataField: "fichier",
-      text: "Fichier",
+      dataField: "portee",
+      text: "Portee",
       sort: true,
     },
     {
-      dataField: "details",
-      text: "Details",
+      dataField: "phone",
+      text: "Telephone",
       sort: true,
     },
     {
-      dataField: "resume",
-      text: "Resume",
+      dataField: "email",
+      text: "Email",
       sort: true,
     },
     {
-      dataField: "etat",
-      text: "Etat",
+      dataField: "location",
+      text: "Location",
       sort: true,
     },
   ];
 
-  // Table Data
-  const annonceData = [
-    {
-      code: 2,
-      creation: "01/01/2023",
-      debut: "03/01/2023",
-      fin: "03/02/2023",
-      fichier: "file2",
-      details: "cette annonce 2......",
-      resume: "cette annonce 2......",
-      etat: "active",
-    },
+let stationData = [];
+stationData = JSON.parse(localStorage.getItem("station"));
 
-    {
-      code: 3,
-      creation: "10/12/2022",
-      debut: "12/12/2022",
-      fin: "12/01/2023",
-      fichier: "file3",
-      details: "cette annonce 3......",
-      resume: "cette annonce 3......",
-      etat: "inactive",
-    },
-
-    {
-      code: 4,
-      creation: "20/11/2022",
-      debut: "22/11/2022",
-      fin: "22/12/2022",
-      fichier: "file4",
-      details: "cette annonce 4......",
-      resume: "cette annonce 4......",
-      etat: "active",
-    },
-
-    {
-      code: 5,
-      creation: "15/10/2022",
-      debut: "17/10/2022",
-      fin: "17/11/2022",
-      fichier: "file5",
-      details: "cette annonce 5......",
-      resume: "cette annonce 5......",
-      etat: "inactive",
-    },
-
-    {
-      code: 6,
-      creation: "01/09/2022",
-      debut: "03/09/2022",
-      fin: "03/10/2022",
-      fichier: "file6",
-      details: "cette annonce 6......",
-      resume: "cette annonce 6......",
-      etat: "active",
-    },
-
-    {
-      code: 7,
-      creation: "20/08/2022",
-      debut: "22/08/2022",
-      fin: "22/09/2022",
-      fichier: "file7",
-      details: "cette annonce 7......",
-      resume: "cette annonce 7......",
-      etat: "inactive",
-    },
-
-    {
-      code: 8,
-      creation: "10/07/2022",
-      debut: "12/07/2022",
-      fin: "12/08/2022",
-      fichier: "file8",
-      details: "cette annonce 8......",
-      resume: "cette annonce 8......",
-      etat: "active",
-    },
-
-    {
-      code: 9,
-      creation: "01/06/2022",
-      debut: "03/06/2022",
-      fin: "03/07/2022",
-      fichier: "file9",
-      details: "cette annonce 9......",
-      resume: "cette annonce 9......",
-      etat: "inactive",
-    },
-  ];
-
-  const defaultSorted: any = [
+  const defaultSorted = [
     {
       dataField: "id",
       order: "asc",
     },
   ];
 
-  const pageOptions: any = {
+  const pageOptions = {
     sizePerPage: 10,
-    totalSize: annonceData.length, // replace later with size(customers),
+    totalSize: stationData.length, // replace later with size(customers),
     custom: true,
   };
 
   // Select All Button operation
-  const selectRow: any = {
+  const selectRow = {
     mode: "checkbox",
   };
 
@@ -185,23 +92,23 @@ const index = () => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Farida - Annonce</title>
+          <title>Farida - Stations</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Annonces" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Stations" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">Toutes les annonces</h4>
+                  <h4 className="card-title">Liste d&apos;Stations</h4>
                   <button
                     onClick={() => {
                       tog_center();
                     }}
                     className="btn btn-primary text-white"
                   >
-                    Creer une annonce{" "}
+                    Nouvelle Station{" "}
                     <i className="mdi mdi-arrow-right align-middle"></i>
                   </button>
                 </CardHeader>
@@ -209,13 +116,13 @@ const index = () => {
                   <PaginationProvider
                     pagination={paginationFactory(pageOptions)}
                     // columns={columns}
-                    // data={annonceData}
+                    // data={stationData}
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
-                        keyField="id"
+                        keyField="code"
                         columns={columns}
-                        data={annonceData}
+                        data={stationData.reverse()}
                         search
                       >
                         {(toolkitProps) => (
