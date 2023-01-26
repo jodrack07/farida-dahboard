@@ -17,65 +17,67 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 const index = () => {
   const columns = [
     {
-      dataField: "nom",
-      text: "Nom complet",
+      dataField: "code",
+      text: "Code",
       sort: true,
     },
     {
-      dataField: "phone",
-      text: "Telephone",
+      dataField: "creation",
+      text: "Creation",
+      sort: true,
+    },
+    {
+      dataField: "debut",
+      text: "Debut",
       sort: true,
     },
 
     {
-      dataField: "email",
-      text: "Email ",
+      dataField: "fin",
+      text: "Fin ",
+      sort: true,
+    },
+
+    {
+      dataField: "fichier",
+      text: "Fichier",
       sort: true,
     },
     {
-      dataField: "address",
-      text: "Address",
+      dataField: "details",
+      text: "Details",
+      sort: true,
+    },
+    {
+      dataField: "resume",
+      text: "Resume",
+      sort: true,
+    },
+    {
+      dataField: "etat",
+      text: "Etat",
       sort: true,
     },
   ];
 
-  // Table Data
-  const annonceData = [
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-    {
-      nom: "Christian Siku",
-      phone: "+243 000 000 000",
-      email: "chris@gmail.com",
-      address: "goma, goma - Himbi",
-    },
-  ];
+  let annonceData = [];
+  annonceData = JSON.parse(localStorage.getItem("annonces"));
 
-  const defaultSorted: any = [
+  const defaultSorted = [
     {
       dataField: "id",
       order: "asc",
     },
   ];
 
-  const pageOptions: any = {
+  const pageOptions = {
     sizePerPage: 10,
     totalSize: annonceData.length, // replace later with size(customers),
     custom: true,
   };
 
   // Select All Button operation
-  const selectRow: any = {
+  const selectRow = {
     mode: "checkbox",
   };
 
@@ -95,23 +97,23 @@ const index = () => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Farida - Stations</title>
+          <title>Farida - Annonce</title>
         </MetaTags>
         <div className="container-fluid">
-          <Breadcrumbs title="Tables" breadcrumbItem="Stations" />
+          <Breadcrumbs title="Tables" breadcrumbItem="Annonces" />
 
           <Row>
             <Col className="col-12">
               <Card>
                 <CardHeader className="justify-content-between d-flex align-items-center">
-                  <h4 className="card-title">Liste d&apos;Stations</h4>
+                  <h4 className="card-title">Toutes les annonces</h4>
                   <button
                     onClick={() => {
                       tog_center();
                     }}
                     className="btn btn-primary text-white"
                   >
-                    Nouvel utulisateur{" "}
+                    Creer une annonce{" "}
                     <i className="mdi mdi-arrow-right align-middle"></i>
                   </button>
                 </CardHeader>
@@ -123,9 +125,9 @@ const index = () => {
                   >
                     {({ paginationProps, paginationTableProps }) => (
                       <ToolkitProvider
-                        keyField="id"
+                        keyField="code"
                         columns={columns}
-                        data={annonceData}
+                        data={annonceData.reverse()}
                         search
                       >
                         {(toolkitProps) => (

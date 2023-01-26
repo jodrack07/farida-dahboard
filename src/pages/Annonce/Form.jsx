@@ -11,14 +11,54 @@ import {
 } from "reactstrap";
 
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import { randomId } from "src/components/NonAuthLayout";
 
 const From = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Get the form data as an object
+    const data = new FormData(event.target);
+    let formData = {};
+    for (const [key, value] of data) {
+      formData[key] = value;
+    }
+    // Get the existing array from localstorage
+    let info = JSON.parse(localStorage.getItem("annonces")) || initialInfo;
+    // Convert date into string
+    let today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    today = dd + "/" + mm + "/" + yyyy;
+
+    // Create an object with the desired properties and values
+    const newData = {
+      code: randomId(4),
+      creation: today,
+      debut: formData.debut,
+      fin: formData.fin,
+      fichier: "Fichier" + randomId(5),
+      details: formData.details,
+      resume: formData.description,
+      etat: "inactive",
+    };
+    // Push the new form data to the array
+    info.push(newData);
+    // Save the updated array to localstorage
+    localStorage.setItem("annonces", JSON.stringify(info));
+  };
   return (
     <React.Fragment>
       <Col xl={12}>
         <Card>
           <CardBody>
-            <AvForm action="/" className="needs-validation">
+            <AvForm className="needs-validation" onSubmit={handleSubmit}>
               <Row>
                 <Col md="6">
                   <FormGroup className="mb-3">
@@ -37,12 +77,12 @@ const From = () => {
 
                 <Col md="6">
                   <FormGroup className="mb-3">
-                    <Label htmlFor="finValidation">Date de creation</Label>
+                    <Label htmlFor="finValidation">Date de fin</Label>
                     <AvField
-                      name="date"
+                      name="fin"
                       placeholder="Date de fin"
                       type="date"
-                      errorMessage="Selectionnez la date de de fin de l&apos;annonce!"
+                      errorMessage="Selectionnez la date de de fin de l'annonce!"
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="finValidation"
@@ -56,9 +96,9 @@ const From = () => {
                     <Label htmlFor="fileValidation">Fichier associer</Label>
                     <AvField
                       name="fichier"
-                      placeholder="Selection l'affiche de l&apos;annonce"
+                      placeholder="Selection l'affiche de l'annonce"
                       type="file"
-                      errorMessage="Selection l'affiche de l&apos;annonce!"
+                      errorMessage="Selection l'affiche de l'annonce!"
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="fileValidation"
@@ -73,14 +113,14 @@ const From = () => {
                       name="details"
                       placeholder="Details"
                       type="text"
-                      errorMessage="Entrez les details de l&apos;annonces"
+                      errorMessage="Entrez les details de l'annonces"
                       className="form-control"
                       validate={{ required: { value: true } }}
                       id="detailValidation"
                     />
                   </FormGroup>
                 </Col>
-              </Row>              
+              </Row>
               <Row>
                 <Col md="12">
                   <FormGroup className="mb-3">
@@ -91,6 +131,7 @@ const From = () => {
                         className="form-control"
                         placeholder="Description de l'entreprise"
                         id="description"
+                        name="description"
                       />
                       <Label htmlFor="description">
                         Description (optional)

@@ -81,7 +81,7 @@ const Login = ({ history }: LoginProps) => {
 
                 <div className="py-5">
                   <div className="mb-4 mb-md-5 text-center">
-                    <Link to="/sales" className="d-block auth-logo">
+                    <Link to="/dashboard" className="d-block auth-logo">
                       <img src={logoDark} alt="" height="22" className="auth-logo-dark" />
                       <img src={logoLight} alt="" height="22" className="auth-logo-light" />
                     </Link>

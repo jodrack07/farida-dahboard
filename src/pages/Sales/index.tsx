@@ -8,13 +8,7 @@ import { Col, Container, Row } from "reactstrap";
 
 import WidgetData from "./Widgets";
 
-import SalesAnalytics from "./SalesAnalytics";
-
-import EarningReports from "./EarningReports";
-
 import Orders from "./Orders";
-
-import SalesByCountry from "./SalesByCountry";
 
 const Sales = () => {
   return (
@@ -27,6 +21,10 @@ const Sales = () => {
         <Container fluid>
           {/* Render Breadcrumbs */}
           <Breadcrumbs title="Dashboards" breadcrumbItem="Sales" />
+
+          <Row>
+            <WidgetData />
+          </Row>
 
           <Row>
             <Col xl={12}>

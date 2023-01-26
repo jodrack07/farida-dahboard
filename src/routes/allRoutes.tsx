@@ -172,7 +172,7 @@ interface RouteProps {
 
 const userRoutes: Array<RouteProps> = [
   //dashboard
-  { path: "/sales", component: Sales },
+  { path: "/dashboard", component: Sales },
   { path: "/entreprise", component: Entreprise },
   { path: "/entreprise-details", component: EntrepriseDetails },
   { path: "/annonce", component: Annonce },

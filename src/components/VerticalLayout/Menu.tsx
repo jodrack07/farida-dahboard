@@ -12,6 +12,13 @@ interface MenuItemsProps {
 
 const menuItems: Array<MenuItemsProps> = [
   {
+    id: 134,
+    label: "Dashboard",
+    icon: "home",
+    link: "/dashboard",
+    badgecolor: "badge-soft-secondary",
+  },
+  {
     id: 135,
     label: "Entreprises",
     icon: "monitor",
