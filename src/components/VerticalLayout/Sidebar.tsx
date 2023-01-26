@@ -21,7 +21,7 @@ const Sidebar = (props: any) => {
       <div className="vertical-menu">
 
         <div className="navbar-brand-box">
-          <Link to="/sales" className="logo logo-dark">
+          <Link to="/dashboard" className="logo logo-dark">
             <span className="logo-sm">
               <img src={logoSm} alt="" height="22" />
             </span>
@@ -30,7 +30,7 @@ const Sidebar = (props: any) => {
             </span>
           </Link>
 
-          <Link to="/sales" className="logo logo-light">
+          <Link to="/dashboard" className="logo logo-light">
             <span className="logo-sm">
               <img src={logoSm} alt="" height="22" />
             </span>

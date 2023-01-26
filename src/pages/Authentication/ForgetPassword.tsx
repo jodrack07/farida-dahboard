@@ -47,7 +47,7 @@ const ForgetPasswordPage = ({ history }: ForgetPasswordProps) => {
               <Col md={8} lg={6} xl={4}>
                 <div className="text-center py-5">
                   <div className="mb-4 mb-md-5">
-                    <Link to="/sales" className="d-block auth-logo">
+                    <Link to="/dashboard" className="d-block auth-logo">
                       <img src={logoDark} alt="" height="22" className="auth-logo-dark" />
                       <img src={logolight} alt="" height="22" className="auth-logo-light" />
                     </Link>

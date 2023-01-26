@@ -32,7 +32,7 @@ const ErrorCover = () => {
                                                             className="avatar-lg h-auto mx-2" />0</h1>
                                                         <h4 className="text-uppercase text-white-50">Internal Server Error</h4>
                                                         <div className="mt-5 text-center">
-                                                            <Link className="btn btn-info w-100" to="/sales">Back to Dashboard</Link>
+                                                            <Link className="btn btn-info w-100" to="/dashboard">Back to Dashboard</Link>
                                                         </div>
                                                     </div>
                                                 </div>

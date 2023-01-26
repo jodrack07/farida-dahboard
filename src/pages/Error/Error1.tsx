@@ -21,7 +21,7 @@ const Error1 = () => {
                                     <img src={logosm} alt="" className="avatar-lg h-auto mx-2" />4</h1>
                                 <h4 className="text-uppercase text-muted">Opps, page not found</h4>
                                 <div className="mt-5 text-center">
-                                    <Link className="btn btn-primary" to="/sales">Back to Dashboard</Link>
+                                    <Link className="btn btn-primary" to="/dashboard">Back to Dashboard</Link>
                                 </div>
                             </div>
                         </Col>

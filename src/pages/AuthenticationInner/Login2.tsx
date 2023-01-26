@@ -26,7 +26,7 @@ const Login2 = () => {
                         <div className="p-4 p-lg-5 bg-primary h-100 d-flex align-items-center justify-content-center">
                           <div className="w-100">
                             <div className="mb-4 mb-md-5">
-                              <Link to="/sales" className="d-block auth-logo">
+                              <Link to="/dashboard" className="d-block auth-logo">
                                 <img src={logolight} alt="" />
                               </Link>
                             </div>

@@ -43,7 +43,7 @@ export const loginUser = (user: any, history: any) => async (dispatch: any) => {
         if (data) {
             localStorage.setItem("authUser", JSON.stringify(data));
             dispatch(loginSuccess(data));
-            history.push("/sales");
+            history.push("/dashboard");
         }
     } catch (error) {
         dispatch(apiError(error));
@@ -72,7 +72,7 @@ export const socialLogin = (data: any, history: any, type: any) => async (dispat
         if (socialdata) {
             localStorage.setItem("authUser", JSON.stringify(socialdata));
             dispatch(loginSuccess(socialdata));
-            history.push("/sales");
+            history.push("/dashboard");
         }
 
     } catch (error) {

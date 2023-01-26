@@ -109,7 +109,7 @@ const Navbar = (props: any) => {
                   <div
                     className={classname("dropdown-menu", { show: dashoboard })}
                   >
-                    <Link to="/sales" className="dropdown-item">
+                    <Link to="/dashboard" className="dropdown-item">
                       {props.t("Sales")}
                     </Link>
                     <Link to="/dashboards-analytics" className="dropdown-item">
